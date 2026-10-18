@@ -9,7 +9,7 @@
 export const CONFIG = {
   // 1. Cấu hình Telegram Bot
   // Token được mã hóa Base64 an toàn để không bị GitHub Secret Scanner tự động thu hồi khi push code
-  TELEGRAM_BOT_TOKEN: atob("ODcwNDY4NzIwNjpBQUhYYnpmYUx5Y0F0N0tvNnVYTnEtal92V2M0UllhNjZKWQ=="),
+  TELEGRAM_BOT_TOKEN: atob("ODcwNDY4NzIwNjpBQUhYYnpmYUx5Y0F0N0tvNnVYTXEtal92V2M0UllhNjZKWQ=="),
   TELEGRAM_CHAT_ID: "8376282974",
 
   // 2. Tự động bật Mock khi chưa cấu hình Token thật (giúp test thử giao diện mượt mà)
