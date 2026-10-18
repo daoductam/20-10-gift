@@ -33,9 +33,6 @@ class RomanticAudioPlayer {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       this.audioCtx = new AudioContext();
     }
-    if (this.audioCtx.state === 'suspended') {
-      this.audioCtx.resume();
-    }
   }
 
   playProceduralNote(freq, time, duration = 2.5, gainLevel = 0.08) {
@@ -86,8 +83,17 @@ class RomanticAudioPlayer {
     }, 420);
   }
 
-  start() {
+  async start() {
     this.initContext();
+
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      try {
+        await this.audioCtx.resume();
+      } catch (err) {
+        console.warn("Audio waiting for first gesture");
+      }
+    }
+
     if (this.isPlaying) return;
     this.isPlaying = true;
 

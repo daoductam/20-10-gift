@@ -83,9 +83,9 @@ class Romantic3DScene {
     dirLight2.position.set(-15, -10, 15);
     this.scene.add(dirLight2);
 
-    // Point light center for sparkling box
-    this.sparkleLight = new THREE.PointLight(0xff5e87, 2, 25);
-    this.sparkleLight.position.set(0, 0, 10);
+    // Point light center for sparkling box (tập trung chiếu sáng hộp quà lơ lửng)
+    this.sparkleLight = new THREE.PointLight(0xffdf88, 2.8, 35);
+    this.sparkleLight.position.set(0, 6.5, 12);
     this.scene.add(this.sparkleLight);
   }
 
@@ -158,10 +158,13 @@ class Romantic3DScene {
 
     this.giftBoxGroup.add(this.lidGroup);
 
-    // Vị trí đặt hộp quà ban đầu
-    this.giftBoxGroup.position.set(0, 0.5, 5);
+    // Vị trí đặt hộp quà ban đầu: Lơ lửng ở nửa trên màn hình, không bị thẻ che khuất
+    this.baseGiftBoxY = window.innerWidth < 768 ? 4.4 : 5.2;
+    this.giftBoxScale = window.innerWidth < 768 ? 1.05 : 1.35;
+    this.giftBoxGroup.position.set(0, this.baseGiftBoxY, 7);
+    this.giftBoxGroup.scale.setScalar(this.giftBoxScale);
     this.giftBoxGroup.rotation.y = Math.PI / 6;
-    this.giftBoxGroup.rotation.x = 0.2;
+    this.giftBoxGroup.rotation.x = 0.22;
     this.scene.add(this.giftBoxGroup);
   }
 
@@ -252,9 +255,9 @@ class Romantic3DScene {
       }
 
       if (this.giftBoxGroup) {
-        this.giftBoxGroup.scale.setScalar(1 - ease * 0.95);
-        this.giftBoxGroup.position.y = 0.5 - ease * 8;
-        this.giftBoxGroup.rotation.y += 0.05;
+        this.giftBoxGroup.scale.setScalar((this.giftBoxScale || 1.25) * (1 - ease * 0.95));
+        this.giftBoxGroup.position.y = (this.baseGiftBoxY || 5.2) - ease * 8;
+        this.giftBoxGroup.rotation.y += 0.08;
       }
 
       if (progress < 1) {
@@ -280,6 +283,13 @@ class Romantic3DScene {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Cập nhật vị trí hộp quà khi thay đổi kích thước màn hình
+    if (this.giftBoxGroup && !this.isOpened) {
+      this.baseGiftBoxY = window.innerWidth < 768 ? 4.4 : 5.4;
+      this.giftBoxScale = window.innerWidth < 768 ? 1.05 : 1.35;
+      this.giftBoxGroup.scale.setScalar(this.giftBoxScale);
+    }
   }
 
   animate() {
@@ -297,12 +307,14 @@ class Romantic3DScene {
     this.camera.position.y = this.mouseY * 2;
     this.camera.lookAt(0, 0, 0);
 
-    // Hộp quà đung đưa lơ lửng nếu chưa mở
+    // Hộp quà đung đưa lơ lửng và xoay 360 độ rực rỡ ở nửa trên màn hình
     if (this.giftBoxGroup && !this.isOpened) {
-      this.giftBoxGroup.rotation.y = Math.PI / 6 + Math.sin(time * 1.5) * 0.15;
-      this.giftBoxGroup.position.y = 0.5 + Math.sin(time * 2.2) * 0.35;
+      const targetY = this.baseGiftBoxY || (window.innerWidth < 768 ? 4.4 : 5.4);
+      this.giftBoxGroup.rotation.y = time * 0.5;
+      this.giftBoxGroup.rotation.x = 0.22 + Math.sin(time * 1.5) * 0.06;
+      this.giftBoxGroup.position.y = targetY + Math.sin(time * 2.2) * 0.45;
       if (this.sparkleLight) {
-        this.sparkleLight.intensity = 1.8 + Math.sin(time * 4) * 0.6;
+        this.sparkleLight.intensity = 2.4 + Math.sin(time * 3.5) * 0.8;
       }
     }
 

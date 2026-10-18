@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20261018_7" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261018_9" />
 
   <!-- Three.js & Confetti CDNs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -52,7 +52,30 @@
   <!-- ============================================================
        PHASE 1: SURPRISE 3D GIFT BOX OPENING OVERLAY
        ============================================================ -->
+  <!-- ============================================================
+       PHASE 1: SURPRISE 3D GIFT BOX OPENING OVERLAY
+       ============================================================ -->
   <div class="opening-overlay" id="opening-overlay">
+    
+    <!-- 3D Floating Gift Box on Welcome Screen -->
+    <div class="opening-gift-showcase" id="opening-gift-showcase" title="Chạm vào để mở quà!">
+      <div class="floating-box-glow"></div>
+      <div class="opening-gift-box-3d" id="opening-gift-box-3d">
+        <!-- Lid with Bow -->
+        <div class="box-lid">
+          <div class="bow-center"></div>
+          <div class="bow-loop loop-left"></div>
+          <div class="bow-loop loop-right"></div>
+          <div class="ribbon-horizontal"></div>
+        </div>
+        <!-- Box Base -->
+        <div class="box-base">
+          <div class="ribbon-vertical"></div>
+        </div>
+      </div>
+      <div class="floating-gift-shadow"></div>
+    </div>
+
     <div class="opening-card">
       <span class="opening-badge">✨ Special Gift For 20/10 ✨</span>
       <h1 class="opening-title">Hộp Quà Bí Ẩn 20/10</h1>
@@ -331,6 +354,6 @@
   </div>
 
   <!-- Main JavaScript Entry Module -->
-  <script type="module" src="./assets/js/app.js?v=20261018_6"></script>
+  <script type="module" src="./assets/js/app.js?v=20261018_9"></script>
 </body>
 </html>

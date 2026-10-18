@@ -33,32 +33,69 @@ class WomenDayApp {
 
     // 4. Gắn các sự kiện tương tác
     this.setupEventListeners();
+
+    // 5. Tự động phát nhạc ngay khi vào trang web (kèm fallback interaction)
+    this.setupAutoplayMusic();
+  }
+
+  setupAutoplayMusic() {
+    // Cố gắng phát nhạc ngay lập tức khi vừa tải trang
+    musicPlayer.start();
+
+    // Bắt ngay bất kỳ tương tác đầu tiên (chạm, click, scroll) để bật nhạc nếu trình duyệt chặn autoplay
+    const triggerAudio = () => {
+      musicPlayer.start();
+      ['click', 'touchstart', 'pointerdown', 'keydown', 'scroll'].forEach(evt => {
+        window.removeEventListener(evt, triggerAudio);
+        document.removeEventListener(evt, triggerAudio);
+      });
+    };
+
+    ['click', 'touchstart', 'pointerdown', 'keydown', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, triggerAudio, { once: true, passive: true });
+      document.addEventListener(evt, triggerAudio, { once: true, passive: true });
+    });
   }
 
   setupGiftOpenTrigger() {
     const openBtn = document.getElementById('open-gift-btn');
     const openingOverlay = document.getElementById('opening-overlay');
+    const giftShowcase = document.getElementById('opening-gift-showcase');
 
-    if (openBtn && openingOverlay) {
-      openBtn.addEventListener('click', () => {
-        // Kích hoạt nhạc nền lãng mạn
-        musicPlayer.start();
+    const handleOpen = () => {
+      // Đảm bảo nhạc nền vang lên ngay lập tức khi mở quà
+      musicPlayer.start();
+      if (musicPlayer.audioCtx && musicPlayer.audioCtx.state === 'suspended') {
+        musicPlayer.audioCtx.resume();
+      }
 
-        // Nổ pháo hoa Confetti rực rỡ
-        this.fireConfetti();
+      // Kích hoạt class opened để hộp quà bung nắp 3D
+      if (openingOverlay) {
+        openingOverlay.classList.add('opened');
+      }
 
-        // Mở hộp quà 3D trong Three.js
-        if (threeSceneInstance) {
-          threeSceneInstance.openGiftBox(() => {
-            // Sau khi hộp quà bung nắp
-            setTimeout(() => {
-              openingOverlay.classList.add('hidden');
-            }, 300);
-          });
-        } else {
+      // Nổ pháo hoa Confetti rực rỡ
+      this.fireConfetti();
+
+      // Mở hộp quà 3D trong Three.js
+      if (threeSceneInstance) {
+        threeSceneInstance.openGiftBox(() => {
+          setTimeout(() => {
+            openingOverlay.classList.add('hidden');
+          }, 450);
+        });
+      } else {
+        setTimeout(() => {
           openingOverlay.classList.add('hidden');
-        }
-      });
+        }, 700);
+      }
+    };
+
+    if (openBtn) {
+      openBtn.addEventListener('click', handleOpen);
+    }
+    if (giftShowcase) {
+      giftShowcase.addEventListener('click', handleOpen);
     }
   }
 

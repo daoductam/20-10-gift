@@ -180,12 +180,13 @@ body {
   z-index: 50;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 70px;
-  background: radial-gradient(circle at 50% 45%, rgba(45, 12, 55, 0.4) 0%, rgba(11, 3, 14, 0.9) 80%);
+  padding: 30px 16px;
+  background: radial-gradient(circle at 50% 35%, rgba(65, 15, 80, 0.3) 0%, rgba(11, 3, 14, 0.88) 85%);
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.2s;
   pointer-events: auto;
+  overflow-y: auto;
 }
 
 .opening-overlay.hidden {
@@ -194,17 +195,149 @@ body {
   pointer-events: none;
 }
 
+/* ============================================================
+   FLOATING 3D GIFT BOX IN OPENING SCREEN
+   ============================================================ */
+.opening-gift-showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  perspective: 1000px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.4s ease;
+}
+
+.opening-gift-showcase:hover {
+  transform: scale(1.06);
+}
+
+.floating-box-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 94, 135, 0.45) 0%, rgba(246, 196, 69, 0.3) 45%, transparent 70%);
+  filter: blur(25px);
+  pointer-events: none;
+  animation: pulseGlowAura 3s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlowAura {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+}
+
+.opening-gift-box-3d {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  animation: floatFloatingBox 3.6s ease-in-out infinite;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.opening-gift-box-3d .box-lid {
+  width: 116px;
+  height: 30px;
+}
+
+.opening-gift-box-3d .box-base {
+  width: 104px;
+  height: 82px;
+}
+
+.opening-gift-box-3d .bow-loop {
+  width: 22px;
+  height: 16px;
+  top: -14px;
+}
+
+.opening-gift-box-3d .loop-left {
+  left: 36px;
+}
+
+.opening-gift-box-3d .loop-right {
+  right: 36px;
+}
+
+.opening-gift-box-3d .bow-center {
+  width: 18px;
+  height: 18px;
+  top: -10px;
+}
+
+.opening-gift-box-3d .ribbon-horizontal {
+  height: 11px;
+}
+
+.opening-gift-box-3d .ribbon-vertical {
+  width: 11px;
+}
+
+@keyframes floatFloatingBox {
+  0%, 100% {
+    transform: translateY(0) rotateX(12deg) rotateY(-18deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateX(8deg) rotateY(18deg);
+  }
+}
+
+.floating-gift-shadow {
+  width: 100px;
+  height: 14px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.6) 0%, transparent 75%);
+  border-radius: 50%;
+  margin-top: 8px;
+  animation: shadowScale 3.6s ease-in-out infinite;
+}
+
+@keyframes shadowScale {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(0.75); opacity: 0.3; }
+}
+
+/* Khi mở quà (Opening Unbox Animation) */
+.opening-overlay.opened .opening-gift-box-3d .box-lid {
+  transform: translateY(-90px) rotate(-35deg) scale(0.9);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+}
+
+.opening-overlay.opened .opening-gift-box-3d .box-base {
+  transform: translateY(25px) scale(0.85);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.6s ease;
+}
+
+.opening-overlay.opened .floating-box-glow {
+  transform: translate(-50%, -50%) scale(2.4);
+  opacity: 0;
+  transition: transform 0.9s ease, opacity 0.6s ease;
+}
+
 .opening-card {
   text-align: center;
-  max-width: 520px;
-  margin: 0 20px;
-  background: rgba(25, 9, 32, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-glass-bright);
-  padding: 32px 28px;
-  border-radius: 28px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 94, 135, 0.3);
+  max-width: 450px;
+  margin: 0 16px;
+  background: rgba(22, 7, 28, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(246, 196, 69, 0.35);
+  padding: 18px 22px 22px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 94, 135, 0.25);
   animation: floatCard 4s ease-in-out infinite;
 }
 
