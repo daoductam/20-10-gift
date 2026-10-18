@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng Ngày 20/10 - Dành Tặng Nhi & Phương ✨</title>
+  <meta name="description" content="Trang web 3D tương tác chúc mừng ngày Phụ nữ Việt Nam 20/10 gửi trọn yêu thương đến Nhi & Phương." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261018_7" />
+
+  <!-- Three.js & Confetti CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-glow-orb orb-1"></div>
+  <div class="ambient-glow-orb orb-2"></div>
+
+  <!-- 3D Three.js WebGL Canvas Layer -->
+  <div id="webgl-canvas-container"></div>
+
+  <!-- Top Floating Music Controller Widget -->
+  <div class="music-widget">
+    <button class="music-btn" id="music-toggle-btn" type="button" title="Bật/Tắt nhạc nền lãng mạn">
+      <div class="equalizer-bars">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <span>Nhạc 20/10</span>
+    </button>
+  </div>
+
+  <!-- ============================================================
+       PHASE 1: SURPRISE 3D GIFT BOX OPENING OVERLAY
+       ============================================================ -->
+  <div class="opening-overlay" id="opening-overlay">
+    <div class="opening-card">
+      <span class="opening-badge">✨ Special Gift For 20/10 ✨</span>
+      <h1 class="opening-title">Hộp Quà Bí Ẩn 20/10</h1>
+      <span class="opening-names">Nhi & Phương</span>
+      <p class="opening-desc">
+        Một điều bất ngờ ngọt ngào đã được chuẩn bị chu đáo để dành riêng cho hai người phụ nữ tuyệt vời nhất.
+      </p>
+      <button class="btn-open-gift" id="open-gift-btn" type="button">
+        <i class="fa-solid fa-gift"></i>
+        <span>Chạm Để Mở Quà</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN CONTENT WRAPPER
+       ============================================================ -->
+  <div class="main-wrapper">
+
+    <!-- 1. HERO SECTION: CELEBRATION GREETING -->
+    <header class="hero-section" id="hero-section">
+      <div class="content-container">
+        <div class="hero-tag">
+          <i class="fa-solid fa-sparkles"></i>
+          <span>20 Tháng 10 - Ngày Phụ Nữ Việt Nam</span>
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="gradient-text">Rạng Rỡ & Tỏa Sáng</span>
+        </h1>
+        <div class="hero-script">Nhi & Phương</div>
+
+        <p class="hero-subtitle">
+          Nhân ngày 20/10, chúc hai bạn luôn xinh đẹp, tự tin, rực rỡ như những đóa hoa tươi thắm nhất và đón nhận ngàn điều may mắn, hạnh phúc ngập tràn! 🌸
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#memories-section" class="btn-secondary">
+            <i class="fa-solid fa-images"></i>
+            <span>Xem Album Kỷ Niệm</span>
+          </a>
+          <a href="#treat-section" class="btn-primary">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Chọn Kèo Ăn Uống 20/10</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. MEMORIES & 3D POLAROID GALLERY SECTION -->
+    <section class="section-wrapper" id="memories-section">
+      <div class="content-container">
+        <div class="section-header">
+          <span class="section-tag">Dành Riêng Cho Hai Bạn</span>
+          <h2 class="section-title">Khoảnh Khắc Kỷ Niệm 3D</h2>
+          <p class="section-desc">
+            Chạm vào từng bức ảnh Polaroid 3D để lật mở những lời chúc và thông điệp bí mật gửi riêng đến Nhi và Phương!
+          </p>
+        </div>
+
+        <!-- Celebrant Tab Switcher -->
+        <div class="celebrant-tab-nav">
+          <button class="tab-btn active" data-celebrant="nhi" type="button">
+            <span>🌸 Nhi Đáng Yêu</span>
+          </button>
+          <button class="tab-btn" data-celebrant="phuong" type="button">
+            <span>🌷 Phương Dịu Dàng</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Celebrant Card & Polaroid Container -->
+        <div id="celebrant-profile-container"></div>
+      </div>
+    </section>
+
+    <!-- 3. FOOD TREAT MINIGAME SECTION -->
+    <section class="food-treat-section" id="treat-section">
+      <div class="content-container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-utensils"></i> Kèo Ăn Uống 20/10</span>
+          <h2 class="section-title">Nàng Cứ Chọn, Còn Lại Để Tớ Lo! 🥂</h2>
+          <p class="section-desc">
+            Nhân dịp đặc biệt này, tớ xin phép được mời hai bạn một bữa thật hoành tráng vào <strong>19h tối ngày 19/10</strong>. Hãy chọn 1 trong 3 quán ruột dưới đây nhé:
+          </p>
+          <div class="appointment-pill">
+            <i class="fa-solid fa-clock"></i>
+            <span>Thời gian hẹn: <strong>19:00 - Tối Thứ Hai (19/10)</strong></span>
+          </div>
+        </div>
+
+        <!-- 3 Food Cards Grid -->
+        <div class="food-cards-grid" id="food-cards-grid"></div>
+
+        <!-- Decision Form Panel -->
+        <div class="treat-decision-panel">
+          <div class="decision-form-grid">
+
+            <!-- Voter Selector -->
+            <div>
+              <label class="form-group-label"><i class="fa-solid fa-user-heart"></i> Ai Đang Đưa Ra Quyết Định?</label>
+              <div class="voter-selector-group">
+                <label class="voter-pill-label">
+                  <input type="radio" name="voter" value="Nhi 🌸" />
+                  <div class="voter-pill-box">Nhi chọn nè 🌸</div>
+                </label>
+                <label class="voter-pill-label">
+                  <input type="radio" name="voter" value="Phương 🌷" />
+                  <div class="voter-pill-box">Phương chọn nè 🌷</div>
+                </label>
+                <label class="voter-pill-label">
+                  <input type="radio" name="voter" value="Cả hai đứa tớ 💕" checked />
+                  <div class="voter-pill-box">Cả 2 đứa tớ đồng lòng 💕</div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Custom Food Input (Optional) -->
+            <div>
+              <label class="form-group-label" for="custom-food-input">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Hoặc nếu hai bạn đang thèm món gì khác?
+              </label>
+              <input 
+                type="text" 
+                id="custom-food-input" 
+                class="custom-dish-input" 
+                placeholder="Nhập món ăn bạn mong muốn (ví dụ: Pizza 4P's, Cơm niêu, Bò né...)" 
+              />
+            </div>
+
+            <!-- Note Input -->
+            <div>
+              <label class="form-group-label" for="custom-note-input">
+                <i class="fa-solid fa-comment-heart"></i> Lời nhắn gửi thêm (Thời gian rảnh, dặn dò...)
+              </label>
+              <input 
+                type="text" 
+                id="custom-note-input" 
+                class="custom-note-input" 
+                placeholder="Ví dụ: 19h tối 19/10 chốt đơn nhé, nhớ đến đúng giờ nha..." 
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn-submit-treat" id="submit-treat-btn" type="button">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Chốt Kèo Này Ngay & Bắn Tín Hiệu! ✨</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SECRET MYSTERY GIFT SECTION (HỘP QUÀ CHUNG TƯƠNG TÁC) -->
+    <section class="secret-gift-section" id="secret-gift-section">
+      <div class="content-container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Món Quà Bất Ngờ Cuối Cùng</span>
+          <h2 class="section-title">Hộp Quà Bí Ẩn 20/10 🎁✨</h2>
+          <p class="section-desc">
+            Chạm vào chiếc hộp bên dưới để mở hé điều bí mật mà tớ đã chuẩn bị cho Nhi & Phương nhé!
+          </p>
+        </div>
+
+        <!-- Interactive Mystery Box Container -->
+        <div class="mystery-box-interactive-stage" id="mystery-box-stage">
+          
+          <!-- The 3D CSS Gift Box (Clickable) -->
+          <div class="mystery-gift-box-wrapper" id="mystery-gift-box-trigger" title="Nhấp vào để mở hộp quà!">
+            <div class="magic-glow-orb"></div>
+            
+            <div class="mystery-gift-box-3d">
+              <!-- Lid with Bow -->
+              <div class="box-lid">
+                <div class="bow-center"></div>
+                <div class="bow-loop loop-left"></div>
+                <div class="bow-loop loop-right"></div>
+                <div class="ribbon-horizontal"></div>
+              </div>
+              
+              <!-- Box Base -->
+              <div class="box-base">
+                <div class="ribbon-vertical"></div>
+              </div>
+
+              <!-- Question Mark floating inside when opened -->
+              <div class="mystery-question-orb" id="mystery-question-orb">
+                <div class="question-icon">?</div>
+                <div class="orb-aura"></div>
+              </div>
+            </div>
+
+            <!-- Tap Hint Button -->
+            <div class="box-tap-hint" id="box-tap-hint">
+              <i class="fa-solid fa-hand-pointer"></i>
+              <span>Chạm vào hộp quà để mở bí mật ✨</span>
+            </div>
+          </div>
+
+          <!-- Secret Revelation Card (Appears after box opens) -->
+          <div class="mystery-reveal-card" id="mystery-reveal-card">
+            <div class="reveal-badge">
+              <i class="fa-solid fa-lock"></i>
+              <span>NIÊM PHONG TUYỆT MẬT • HẸN GẶP LÚC 19H TỐI 19/10</span>
+            </div>
+            
+            <h3 class="reveal-title">Món Quà Cho Nhi & Phương: <span class="mystery-highlight">[ ? ? ? ]</span></h3>
+            
+            <div class="reveal-content-body">
+              <p class="reveal-lead">
+                🎁 <strong>Món quà hiện vật đã được chuẩn bị chu đáo</strong>, gói ghém cẩn thận và thắt nơ xinh xắn chỉ chờ ngày trao tay...
+              </p>
+              <p class="reveal-sub">
+                Nhưng luật chơi là: Món quà này chỉ được chính thức <strong>"BÓC TEM"</strong> và trao tận tay khi chúng mình gặp nhau trong buổi hẹn <strong>19h tối ngày 19/10</strong>! 🌸🌷
+              </p>
+              <div class="reveal-quote">
+                “Đảm bảo hai nàng nhìn thấy là mê tít! Hãy giữ trọn sự tò mò và hẹn gặp hai bạn lúc <strong>19h tối ngày 19/10</strong> nhé!” ✨
+              </div>
+            </div>
+
+            <!-- Promise Button -->
+            <button class="btn-lock-promise" id="btn-lock-promise" type="button">
+              <i class="fa-solid fa-heart-circle-check"></i>
+              <span>Đã Ghi Nhớ Lời Hẹn 19h Tối 19/10 Nha! 💖</span>
+            </button>
+            <div class="promise-feedback" id="promise-feedback">
+              🎉 Đã chốt kèo hẹn lúc 19h tối 19/10! Chuẩn bị lên đồ thật xinh để bóc quà nhé hai nàng!
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="content-container">
+        <p>Thiết kế dành tặng riêng cho <strong>Nhi & Phương</strong> nhân ngày 20/10 <span class="footer-heart">❤️</span></p>
+        <p style="margin-top: 8px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.4);">
+          Chúc hai bạn luôn có những ngày tháng rực rỡ, hạnh phúc và luôn ngập tràn tiếng cười!
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ============================================================
+       CONFIRMATION & TELEGRAM FEEDBACK MODAL
+       ============================================================ -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-icon-badge">
+        <i class="fa-solid fa-heart-circle-check"></i>
+      </div>
+      <h3 class="modal-title">Kèo Đã Được Chốt! 🎉</h3>
+      <p class="modal-desc">
+        Tín hiệu đã được bắn thẳng về Telegram của bạn ấy! Hãy chuẩn bị lên đồ thật xinh đẹp cho bữa tiệc ngày 20/10 nhé!
+      </p>
+
+      <div class="modal-summary-box" id="modal-summary-content">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-modal-close" id="modal-close-btn" type="button">Tuyệt Vời Quá!</button>
+        <a href="#" class="btn-fallback-share" id="modal-fallback-share" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span>Gửi thêm tin nhắn qua Zalo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Entry Module -->
+  <script type="module" src="./assets/js/app.js?v=20261018_6"></script>
+</body>
+</html>
