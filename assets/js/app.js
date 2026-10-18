@@ -5,10 +5,10 @@
  * và tích hợp gửi thông báo Telegram Bot.
  */
 
-import { CONFIG } from './config.js';
-import { CELEBRANTS_DATA, FOOD_OPTIONS } from './data.js?v=20261018_5';
-import { musicPlayer } from './audio-player.js';
-import { initThreeScene, threeSceneInstance } from './three-scene.js';
+import { CONFIG } from './config.js?v=20261018_12';
+import { CELEBRANTS_DATA, FOOD_OPTIONS } from './data.js?v=20261018_12';
+import { musicPlayer } from './audio-player.js?v=20261018_12';
+import { initThreeScene, threeSceneInstance } from './three-scene.js?v=20261018_12';
 
 class WomenDayApp {
   constructor() {
@@ -34,26 +34,25 @@ class WomenDayApp {
     // 4. Gắn các sự kiện tương tác
     this.setupEventListeners();
 
-    // 5. Tự động phát nhạc ngay khi vào trang web (kèm fallback interaction)
+    // 5. Tự động phát nhạc ngay khi người dùng chạm vào web
     this.setupAutoplayMusic();
   }
 
   setupAutoplayMusic() {
-    // Cố gắng phát nhạc ngay lập tức khi vừa tải trang
-    musicPlayer.start();
-
-    // Bắt ngay bất kỳ tương tác đầu tiên (chạm, click, scroll) để bật nhạc nếu trình duyệt chặn autoplay
-    const triggerAudio = () => {
-      musicPlayer.start();
-      ['click', 'touchstart', 'pointerdown', 'keydown', 'scroll'].forEach(evt => {
-        window.removeEventListener(evt, triggerAudio);
-        document.removeEventListener(evt, triggerAudio);
-      });
+    // Kích hoạt ngay khi có tương tác đầu tiên của người dùng (chạm, click, bấm phím)
+    const triggerAudio = async () => {
+      const started = await musicPlayer.start();
+      if (started) {
+        ['click', 'touchstart', 'pointerdown', 'keydown'].forEach(evt => {
+          window.removeEventListener(evt, triggerAudio);
+          document.removeEventListener(evt, triggerAudio);
+        });
+      }
     };
 
-    ['click', 'touchstart', 'pointerdown', 'keydown', 'scroll'].forEach(evt => {
-      window.addEventListener(evt, triggerAudio, { once: true, passive: true });
-      document.addEventListener(evt, triggerAudio, { once: true, passive: true });
+    ['click', 'touchstart', 'pointerdown', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, triggerAudio, { passive: true });
+      document.addEventListener(evt, triggerAudio, { passive: true });
     });
   }
 

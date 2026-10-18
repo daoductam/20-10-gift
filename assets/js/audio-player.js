@@ -90,11 +90,16 @@ class RomanticAudioPlayer {
       try {
         await this.audioCtx.resume();
       } catch (err) {
-        console.warn("Audio waiting for first gesture");
+        // Trình duyệt tạm hoãn cho đến khi có tương tác đầu tiên
+        return false;
       }
     }
 
-    if (this.isPlaying) return;
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      return false;
+    }
+
+    if (this.isPlaying) return true;
     this.isPlaying = true;
 
     if (CONFIG.EXTERNAL_MUSIC_URL && !CONFIG.USE_PROCEDURAL_PIANO) {
@@ -102,12 +107,13 @@ class RomanticAudioPlayer {
         this.audioElement = new Audio(CONFIG.EXTERNAL_MUSIC_URL);
         this.audioElement.loop = true;
       }
-      this.audioElement.play().catch(e => console.warn("Audio autoplay blocked:", e));
+      this.audioElement.play().catch(() => {});
     } else {
       this.playArpeggio();
     }
 
     this.updateUI(true);
+    return true;
   }
 
   pause() {
